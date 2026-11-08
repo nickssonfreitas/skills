@@ -1,0 +1,22 @@
+name: Check wizard template
+
+on:
+  pull_request:
+    paths:
+      - skills/engineering/wizard/template.sh
+      - scripts/check-wizard-template.sh
+      - .github/workflows/check-wizard.yml
+  push:
+    branches: [main]
+    paths:
+      - skills/engineering/wizard/template.sh
+      - scripts/check-wizard-template.sh
+      - .github/workflows/check-wizard.yml
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - run: bash scripts/check-wizard-template.sh
